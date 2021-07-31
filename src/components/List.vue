@@ -19,9 +19,6 @@ export default {
     Item,
   },
   props: ["todoArr", "checkTodo", "deleteTodo"],
-  data() {
-    return {};
-  },
 };
 </script>
 

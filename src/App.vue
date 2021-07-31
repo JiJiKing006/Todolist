@@ -29,17 +29,22 @@ export default {
   },
   data() {
     return {
-      todoArr: [
-        { id: "001", title: "喝酒", done: true },
-        { id: "002", title: "吃饭", done: true },
-        { id: "003", title: "开车", done: true },
-      ],
+      todoArr: JSON.parse(localStorage.getItem("todo")) || [],
     };
+  },
+  watch: {
+    // 监视事项数据，实现添加删除等变更数据，更新到本地存储,开启深度监视，能够监视到done实现
+    todoArr: {
+      deep: true,
+      handler(val) {
+        localStorage.setItem("todo", JSON.stringify(val));
+      },
+    },
   },
   methods: {
     // 添加todo
     addTodo(todos) {
-      this.todoArr.splice(0, 0, todos);
+      this.todoArr.unshift(todos);
     },
     // 勾选或者取消勾选
     checkTodo(id) {
